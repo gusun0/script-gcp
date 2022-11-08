@@ -2,12 +2,12 @@
 gcloud services enable container.googleapis.com \
 	cloudbuild.googleapis.com \
 	sourcerepo.googleapis.com \
-	containeranalysus,googleapis.com
+	containeranalysis.googleapis.com
 
 # crea un cluster de GKE que usaras para implementar
 # la aplicacion en este ejercicio
-gcloud container clusters create hello-app-cd \
-	--num-nodes 1 --zone us-central1-b
+	gcloud container clusters create hello-app-cd \
+		--num-nodes 1 --zone us-central1-b
 
 #si nunca usaste git en cloud shell
 # configuralo con tu nombre y direccion de correo
@@ -39,5 +39,5 @@ git remote add google \
 
 # crea una compilacion de cloud build basada en la ultima confirmacion
 cd ~/cd ~/kubernetes-cd-app
-COMMIT_ID="$(git rev-parse --short-7 HEAD)"
+COMMIT_ID="$(git rev-parse --short=7 HEAD)"
 gcloud builds submit --tag="gcr.io/${PROJECT_ID}/kubernetes-cd-cloudbuild:${COMMIT_ID}"
